@@ -1,0 +1,12 @@
+https://lmb.informatik.uni-freiburg.de/people/ronneber/u-net/
+
+https://towardsdatascience.com/u-net-b229b32b4a71
+
+https://arxiv.org/pdf/1505.04597.pdf
+
+Medical segmentation decathlon competition
+
+https://decathlon-10.grand-challenge.org/Home/
+
+dataset
+https://drive.google.com/drive/folders/1HqEgzS8BV2c7xYNrZdEAnrHk7osJJ--2
