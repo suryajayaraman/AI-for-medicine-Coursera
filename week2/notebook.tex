@@ -1,0 +1,1911 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{C1M2\_Assignment}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \hypertarget{evaluation-of-diagnostic-models}{%
+\section{Evaluation of Diagnostic
+Models}\label{evaluation-of-diagnostic-models}}
+
+Welcome to the second assignment of course 1. In this assignment, we
+will be working with the results of the X-ray classification model we
+developed in the previous assignment. In order to make the data
+processing a bit more manageable, we will be working with a subset of
+our training, and validation datasets. We will also use our manually
+labeled test dataset of 420 X-rays.
+
+As a reminder, our dataset contains X-rays from 14 different conditions
+diagnosable from an X-ray. We'll evaluate our performance on each of
+these classes using the classification metrics we learned in lecture.
+
+    \hypertarget{outline}{%
+\subsection{Outline}\label{outline}}
+
+Click on these links to jump to a particular section of this assignment!
+- Section \ref{1} - Section \ref{2} - Section \ref{3} -
+Section \ref{3-1} - Section \ref{3-2} - Section \ref{3-3} -
+Section \ref{3-4} - Section \ref{3-5} - Section \ref{3-6} -
+Section \ref{4} - Section \ref{5} - Section \ref{6} - Section \ref{7}
+
+    \textbf{By the end of this assignment you will learn about:}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Accuracy
+\item
+  Prevalence
+\item
+  Specificity \& Sensitivity
+\item
+  PPV and NPV
+\item
+  ROC curve and AUCROC (c-statistic)
+\item
+  Confidence Intervals
+\end{enumerate}
+
+     \#\# 1. Packages
+
+In this assignment, we'll make use of the following packages: -
+\href{https://docs.scipy.org/doc/numpy/}{numpy} is a popular library for
+scientific computing -
+\href{https://matplotlib.org/3.1.1/contents.html}{matplotlib} is a
+plotting library compatible with numpy -
+\href{https://pandas.pydata.org/docs/}{pandas} is what we'll use to
+manipulate our data -
+\href{https://scikit-learn.org/stable/index.html}{sklearn} will be used
+to measure the performance of our model
+
+Run the next cell to import all the necessary packages as well as custom
+util functions.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt} 
+        \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}  
+        
+        \PY{k+kn}{import} \PY{n+nn}{util}
+\end{Verbatim}
+
+
+     \#\# 2. Overview
+
+We'll go through our evaluation metrics in the following order.
+
+\begin{itemize}
+\tightlist
+\item
+  Metrics
+
+  \begin{itemize}
+  \tightlist
+  \item
+    TP, TN, FP, FN
+  \item
+    Accuracy
+  \item
+    Prevalence
+  \item
+    Sensitivity and Specificity
+  \item
+    PPV and NPV
+  \item
+    AUC
+  \end{itemize}
+\item
+  Confidence Intervals
+\end{itemize}
+
+    Let's take a quick peek at our dataset. The data is stored in two CSV
+files called \texttt{train\_preds.csv} and \texttt{valid\_preds.csv}. We
+have precomputed the model outputs for our test cases. We'll work with
+these predictions and the true class labels throughout the assignment.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}38}]:} \PY{c+ch}{\PYZsh{}!ls}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{c+c1}{\PYZsh{}plt.imshow(\PYZsq{}sens\PYZus{}spec.png\PYZsq{})}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{n}{train\PYZus{}results} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{train\PYZus{}preds.csv}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{valid\PYZus{}results} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{valid\PYZus{}preds.csv}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} the labels in our dataset}
+        \PY{n}{class\PYZus{}labels} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Cardiomegaly}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+         \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Emphysema}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+         \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Effusion}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+         \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Hernia}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+         \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Infiltration}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+         \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Mass}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+         \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Nodule}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+         \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Atelectasis}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+         \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Pneumothorax}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+         \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Pleural\PYZus{}Thickening}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+         \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Pneumonia}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+         \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Fibrosis}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+         \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Edema}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+         \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Consolidation}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+        
+        \PY{c+c1}{\PYZsh{} the labels for prediction values in our dataset}
+        \PY{n}{pred\PYZus{}labels} \PY{o}{=} \PY{p}{[}\PY{n}{l} \PY{o}{+} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZus{}pred}\PY{l+s+s2}{\PYZdq{}} \PY{k}{for} \PY{n}{l} \PY{o+ow}{in} \PY{n}{class\PYZus{}labels}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{n}{train\PYZus{}results}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}5}]:}    Unnamed: 0             Image  Atelectasis  Cardiomegaly  Consolidation  \textbackslash{}
+        0       28333  00008270\_015.png            0             0              0   
+        1       97164  00029855\_001.png            1             0              0   
+        2        4236  00001297\_000.png            0             0              0   
+        3       42962  00012359\_002.png            0             0              0   
+        4       63927  00017951\_001.png            0             0              0   
+        
+           Edema  Effusion  Emphysema  Fibrosis  Hernia  {\ldots}  Infiltration\_pred  \textbackslash{}
+        0      0         0          0         0       0  {\ldots}           0.531233   
+        1      0         1          0         0       0  {\ldots}           0.530278   
+        2      0         0          0         0       0  {\ldots}           0.253458   
+        3      0         0          0         0       0  {\ldots}           0.261658   
+        4      0         0          0         0       0  {\ldots}           0.346267   
+        
+           Mass\_pred  Nodule\_pred  Atelectasis\_pred  Pneumothorax\_pred  \textbackslash{}
+        0   0.077701     0.254761          0.071555           0.031860   
+        1   0.316036     0.403122          0.801598           0.793361   
+        2   0.394017     0.414019          0.426408           0.203794   
+        3   0.110398     0.133254          0.061813           0.072169   
+        4   0.060365     0.833480          0.045764           0.038951   
+        
+           Pleural\_Thickening\_pred  Pneumonia\_pred  Fibrosis\_pred  Edema\_pred  \textbackslash{}
+        0                 0.125375        0.259928       0.171520    0.005386   
+        1                 0.550383        0.497499       0.176103    0.359178   
+        2                 0.625412        0.371834       0.693987    0.066478   
+        3                 0.104288        0.160986       0.106231    0.088475   
+        4                 0.794928        0.145725       0.697777    0.017091   
+        
+           Consolidation\_pred  
+        0            0.079036  
+        1            0.698990  
+        2            0.258697  
+        3            0.124298  
+        4            0.192074  
+        
+        [5 rows x 32 columns]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{n}{valid\PYZus{}results}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}6}]:}    Unnamed: 0             Image  Atelectasis  Cardiomegaly  Consolidation  \textbackslash{}
+        0        1685  00008522\_004.png            0             0              0   
+        1        1919  00009813\_000.png            0             0              0   
+        2        2048  00010344\_000.png            0             0              0   
+        3          21  00000242\_003.png            0             0              0   
+        4         503  00002529\_016.png            0             0              0   
+        
+           Edema  Effusion  Emphysema  Fibrosis  Hernia  {\ldots}  Infiltration\_pred  \textbackslash{}
+        0      0         0          0         0       0  {\ldots}           0.256020   
+        1      0         0          0         0       0  {\ldots}           0.382199   
+        2      0         0          0         0       0  {\ldots}           0.427727   
+        3      0         0          0         0       0  {\ldots}           0.158596   
+        4      0         0          0         0       0  {\ldots}           0.536762   
+        
+           Mass\_pred  Nodule\_pred  Atelectasis\_pred  Pneumothorax\_pred  \textbackslash{}
+        0   0.266928     0.312440          0.460342           0.079453   
+        1   0.176825     0.465807          0.489424           0.084595   
+        2   0.115513     0.249030          0.035105           0.238761   
+        3   0.259460     0.334870          0.266489           0.073371   
+        4   0.198797     0.273110          0.186771           0.242122   
+        
+           Pleural\_Thickening\_pred  Pneumonia\_pred  Fibrosis\_pred  Edema\_pred  \textbackslash{}
+        0                 0.271495        0.276861       0.398799    0.015867   
+        1                 0.377318        0.363582       0.638024    0.025948   
+        2                 0.167095        0.166389       0.262463    0.007758   
+        3                 0.229834        0.191281       0.344348    0.008559   
+        4                 0.309786        0.411771       0.244666    0.126930   
+        
+           Consolidation\_pred  
+        0            0.156320  
+        1            0.144419  
+        2            0.125790  
+        3            0.119153  
+        4            0.342409  
+        
+        [5 rows x 31 columns]
+\end{Verbatim}
+            
+    Extract the labels (y) and the predictions (pred).
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{n}{temp} \PY{o}{=} \PY{n}{class\PYZus{}labels} \PY{o}{+} \PY{n}{pred\PYZus{}labels}
+        \PY{c+c1}{\PYZsh{}print(len(temp))}
+        \PY{n}{extra\PYZus{}labels} \PY{o}{=} \PY{p}{[}\PY{n}{i} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{valid\PYZus{}results}\PY{o}{.}\PY{n}{columns} \PY{k}{if} \PY{n}{i} \PY{o+ow}{not} \PY{o+ow}{in} \PY{n}{temp}\PY{p}{]}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Extra columns other than disease lables is }\PY{l+s+si}{\PYZob{}extra\PYZus{}labels\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Extra columns other than disease lables is ['Unnamed: 0', 'Image', 'PatientId']
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{n}{y} \PY{o}{=} \PY{n}{valid\PYZus{}results}\PY{p}{[}\PY{n}{class\PYZus{}labels}\PY{p}{]}\PY{o}{.}\PY{n}{values}
+        \PY{n}{pred} \PY{o}{=} \PY{n}{valid\PYZus{}results}\PY{p}{[}\PY{n}{pred\PYZus{}labels}\PY{p}{]}\PY{o}{.}\PY{n}{values}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{n}{y}\PY{o}{.}\PY{n}{shape}\PY{p}{,} \PY{n}{pred}\PY{o}{.}\PY{n}{shape}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}9}]:} ((1000, 14), (1000, 14))
+\end{Verbatim}
+            
+    Run the next cell to view them side by side.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{c+c1}{\PYZsh{} let\PYZsq{}s take a peek at our dataset}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{valid\PYZus{}results}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{concatenate}\PY{p}{(}\PY{p}{[}\PY{n}{class\PYZus{}labels}\PY{p}{,} \PY{n}{pred\PYZus{}labels}\PY{p}{]}\PY{p}{)}\PY{p}{]}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+         \PY{n}{valid\PYZus{}results}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{concatenate}\PY{p}{(}\PY{p}{[}\PY{n}{class\PYZus{}labels}\PY{p}{,} \PY{n}{pred\PYZus{}labels}\PY{p}{]}\PY{p}{)}\PY{p}{]}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+(1000, 28)
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}10}]:}    Cardiomegaly  Emphysema  Effusion  Hernia  Infiltration  Mass  Nodule  \textbackslash{}
+         0             0          0         0       0             0     0       0   
+         1             0          0         0       0             1     0       1   
+         2             0          0         0       0             0     0       0   
+         3             0          0         0       0             0     0       0   
+         4             0          0         0       0             0     0       0   
+         
+            Atelectasis  Pneumothorax  Pleural\_Thickening  {\ldots}  Infiltration\_pred  \textbackslash{}
+         0            0             0                   0  {\ldots}           0.256020   
+         1            0             0                   0  {\ldots}           0.382199   
+         2            0             0                   0  {\ldots}           0.427727   
+         3            0             0                   0  {\ldots}           0.158596   
+         4            0             0                   0  {\ldots}           0.536762   
+         
+            Mass\_pred  Nodule\_pred  Atelectasis\_pred  Pneumothorax\_pred  \textbackslash{}
+         0   0.266928     0.312440          0.460342           0.079453   
+         1   0.176825     0.465807          0.489424           0.084595   
+         2   0.115513     0.249030          0.035105           0.238761   
+         3   0.259460     0.334870          0.266489           0.073371   
+         4   0.198797     0.273110          0.186771           0.242122   
+         
+            Pleural\_Thickening\_pred  Pneumonia\_pred  Fibrosis\_pred  Edema\_pred  \textbackslash{}
+         0                 0.271495        0.276861       0.398799    0.015867   
+         1                 0.377318        0.363582       0.638024    0.025948   
+         2                 0.167095        0.166389       0.262463    0.007758   
+         3                 0.229834        0.191281       0.344348    0.008559   
+         4                 0.309786        0.411771       0.244666    0.126930   
+         
+            Consolidation\_pred  
+         0            0.156320  
+         1            0.144419  
+         2            0.125790  
+         3            0.119153  
+         4            0.342409  
+         
+         [5 rows x 28 columns]
+\end{Verbatim}
+            
+    To further understand our dataset details, here's a histogram of the
+number of samples for each label in the validation dataset:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{xticks}\PY{p}{(}\PY{n}{rotation}\PY{o}{=}\PY{l+m+mi}{90}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{bar}\PY{p}{(}\PY{n}{x} \PY{o}{=} \PY{n}{class\PYZus{}labels}\PY{p}{,} \PY{n}{height}\PY{o}{=} \PY{n}{y}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_19_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    It seem like our dataset has an imbalanced population of samples.
+Specifically, our dataset has a small number of patients diagnosed with
+a \texttt{Hernia}.
+
+     \#\# 3 Metrics
+
+     \#\#\# 3.1 True Positives, False Positives, True Negatives, and False
+Negatives
+
+The most basic statistics to compute from the model predictions are the
+true positives, true negatives, false positives, and false negatives.
+
+As the name suggests - true positive (TP): The model classifies the
+example as positive, and the actual label also positive. - false
+positive (FP): The model classifies the example as positive,
+\textbf{but} the actual label is negative. - true negative (TN): The
+model classifies the example as negative, and the actual label is also
+negative. - false negative (FN): The model classifies the example as
+negative, \textbf{but} the label is actually positive.
+
+We will count the number of TP, FP, TN and FN in the given data. All of
+our metrics can be built off of these four statistics.
+
+Recall that the model outputs real numbers between 0 and 1. * To compute
+binary class predictions, we need to convert these to either 0 or 1. *
+We'll do this using a threshold value \(th\). * Any model outputs above
+\(th\) are set to 1, and below \(th\) are set to 0.
+
+All of our metrics (except for AUC at the end) will depend on the choice
+of this threshold.
+
+Fill in the functions to compute the TP, FP, TN, and FN for a given
+threshold below.
+
+The first one has been done for you.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{c+c1}{\PYZsh{} UNQ\PYZus{}C1 (UNIQUE CELL IDENTIFIER, DO NOT EDIT)}
+         \PY{k}{def} \PY{n+nf}{true\PYZus{}positives}\PY{p}{(}\PY{n}{y}\PY{p}{,} \PY{n}{pred}\PY{p}{,} \PY{n}{th}\PY{o}{=}\PY{l+m+mf}{0.5}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+sd}{    Count true positives.}
+         
+         \PY{l+s+sd}{    Args:}
+         \PY{l+s+sd}{        y (np.array): ground truth, size (n\PYZus{}examples)}
+         \PY{l+s+sd}{        pred (np.array): model output, size (n\PYZus{}examples)}
+         \PY{l+s+sd}{        th (float): cutoff value for positive prediction from model}
+         \PY{l+s+sd}{    Returns:}
+         \PY{l+s+sd}{        TP (int): true positives}
+         \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+             \PY{n}{TP} \PY{o}{=} \PY{l+m+mi}{0}
+             
+             \PY{c+c1}{\PYZsh{} get thresholded predictions}
+             \PY{n}{thresholded\PYZus{}preds} \PY{o}{=} \PY{p}{(}\PY{n}{pred} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{n}{th}\PY{p}{)}
+         
+             \PY{c+c1}{\PYZsh{} compute TP}
+             \PY{n}{TP} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{(}\PY{n}{y} \PY{o}{==} \PY{l+m+mi}{1}\PY{p}{)} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{thresholded\PYZus{}preds} \PY{o}{==} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+             
+             \PY{k}{return} \PY{n}{TP}
+         
+         \PY{k}{def} \PY{n+nf}{true\PYZus{}negatives}\PY{p}{(}\PY{n}{y}\PY{p}{,} \PY{n}{pred}\PY{p}{,} \PY{n}{th}\PY{o}{=}\PY{l+m+mf}{0.5}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+sd}{    Count true negatives.}
+         
+         \PY{l+s+sd}{    Args:}
+         \PY{l+s+sd}{        y (np.array): ground truth, size (n\PYZus{}examples)}
+         \PY{l+s+sd}{        pred (np.array): model output, size (n\PYZus{}examples)}
+         \PY{l+s+sd}{        th (float): cutoff value for positive prediction from model}
+         \PY{l+s+sd}{    Returns:}
+         \PY{l+s+sd}{        TN (int): true negatives}
+         \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+             \PY{n}{TN} \PY{o}{=} \PY{l+m+mi}{0}
+             
+             \PY{c+c1}{\PYZsh{} get thresholded predictions}
+             \PY{n}{thresholded\PYZus{}preds} \PY{o}{=} \PY{p}{(}\PY{n}{pred} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{n}{th}\PY{p}{)}
+         
+             \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} START CODE HERE (REPLACE INSTANCES OF \PYZsq{}None\PYZsq{} with your code) \PYZsh{}\PYZsh{}\PYZsh{}}
+             
+             \PY{c+c1}{\PYZsh{} compute TN}
+             \PY{n}{TN} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{(}\PY{n}{y} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{)} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{thresholded\PYZus{}preds} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} END CODE HERE \PYZsh{}\PYZsh{}\PYZsh{}}
+             
+             \PY{k}{return} \PY{n}{TN}
+         
+         \PY{k}{def} \PY{n+nf}{false\PYZus{}positives}\PY{p}{(}\PY{n}{y}\PY{p}{,} \PY{n}{pred}\PY{p}{,} \PY{n}{th}\PY{o}{=}\PY{l+m+mf}{0.5}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+sd}{    Count false positives.}
+         
+         \PY{l+s+sd}{    Args:}
+         \PY{l+s+sd}{        y (np.array): ground truth, size (n\PYZus{}examples)}
+         \PY{l+s+sd}{        pred (np.array): model output, size (n\PYZus{}examples)}
+         \PY{l+s+sd}{        th (float): cutoff value for positive prediction from model}
+         \PY{l+s+sd}{    Returns:}
+         \PY{l+s+sd}{        FP (int): false positives}
+         \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+             \PY{n}{FP} \PY{o}{=} \PY{l+m+mi}{0}
+             
+             \PY{c+c1}{\PYZsh{} get thresholded predictions}
+             \PY{n}{thresholded\PYZus{}preds} \PY{o}{=} \PY{p}{(}\PY{n}{pred} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{n}{th}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} START CODE HERE (REPLACE INSTANCES OF \PYZsq{}None\PYZsq{} with your code) \PYZsh{}\PYZsh{}\PYZsh{}}
+         
+             \PY{c+c1}{\PYZsh{} compute FP}
+             \PY{n}{FP} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{(}\PY{n}{y} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{)} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{thresholded\PYZus{}preds} \PY{o}{==} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} END CODE HERE \PYZsh{}\PYZsh{}\PYZsh{}}
+             
+             \PY{k}{return} \PY{n}{FP}
+         
+         \PY{k}{def} \PY{n+nf}{false\PYZus{}negatives}\PY{p}{(}\PY{n}{y}\PY{p}{,} \PY{n}{pred}\PY{p}{,} \PY{n}{th}\PY{o}{=}\PY{l+m+mf}{0.5}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+sd}{    Count false positives.}
+         
+         \PY{l+s+sd}{    Args:}
+         \PY{l+s+sd}{        y (np.array): ground truth, size (n\PYZus{}examples)}
+         \PY{l+s+sd}{        pred (np.array): model output, size (n\PYZus{}examples)}
+         \PY{l+s+sd}{        th (float): cutoff value for positive prediction from model}
+         \PY{l+s+sd}{    Returns:}
+         \PY{l+s+sd}{        FN (int): false negatives}
+         \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+             \PY{n}{FN} \PY{o}{=} \PY{l+m+mi}{0}
+             
+             \PY{c+c1}{\PYZsh{} get thresholded predictions}
+             \PY{n}{thresholded\PYZus{}preds} \PY{o}{=} \PY{p}{(}\PY{n}{pred} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{n}{th}\PY{p}{)}
+         
+             \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} START CODE HERE (REPLACE INSTANCES OF \PYZsq{}None\PYZsq{} with your code) \PYZsh{}\PYZsh{}\PYZsh{}}
+             
+             \PY{c+c1}{\PYZsh{} compute FN}
+             \PY{n}{FN} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{(}\PY{n}{y} \PY{o}{==} \PY{l+m+mi}{1}\PY{p}{)} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{thresholded\PYZus{}preds} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} END CODE HERE \PYZsh{}\PYZsh{}\PYZsh{}}
+             
+             \PY{k}{return} \PY{n}{FN}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{c+c1}{\PYZsh{} Note: we must explicity import \PYZsq{}display\PYZsq{} in order for the autograder to compile the submitted code}
+         \PY{c+c1}{\PYZsh{} Even though we could use this function without importing it, keep this import in order to allow the grader to work}
+         \PY{k+kn}{from} \PY{n+nn}{IPython}\PY{n+nn}{.}\PY{n+nn}{display} \PY{k}{import} \PY{n}{display}
+         \PY{c+c1}{\PYZsh{} Test}
+         \PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{y\PYZus{}test}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}
+                            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{preds\PYZus{}test}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{[}\PY{l+m+mf}{0.8}\PY{p}{,}\PY{l+m+mf}{0.7}\PY{p}{,}\PY{l+m+mf}{0.4}\PY{p}{,}\PY{l+m+mf}{0.3}\PY{p}{,}\PY{l+m+mf}{0.2}\PY{p}{,}\PY{l+m+mf}{0.5}\PY{p}{,}\PY{l+m+mf}{0.6}\PY{p}{,}\PY{l+m+mf}{0.7}\PY{p}{,}\PY{l+m+mf}{0.8}\PY{p}{,}\PY{l+m+mf}{0.1}\PY{p}{,}\PY{l+m+mf}{0.2}\PY{p}{,}\PY{l+m+mf}{0.3}\PY{p}{,}\PY{l+m+mf}{0.4}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}
+                            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{category}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{TP}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{TP}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{TN}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{TN}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{TN}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{FP}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{FP}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{FP}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{FP}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{FN}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{FN}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{FN}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{FN}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{FN}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+                           \PY{p}{\PYZcb{}}\PY{p}{)}
+         
+         \PY{n}{display}\PY{p}{(}\PY{n}{df}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}y\PYZus{}test = np.array([1, 0, 0, 1, 1])}
+         \PY{n}{y\PYZus{}test} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{y\PYZus{}test}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         
+         \PY{c+c1}{\PYZsh{}preds\PYZus{}test = np.array([0.8, 0.8, 0.4, 0.6, 0.3])}
+         \PY{n}{preds\PYZus{}test} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{preds\PYZus{}test}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         
+         \PY{n}{threshold} \PY{o}{=} \PY{l+m+mf}{0.5}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{threshold: }\PY{l+s+si}{\PYZob{}threshold\PYZcb{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}\PYZdq{}\PYZdq{}}\PY{l+s+s2}{Our functions calculated: }
+         \PY{l+s+s2}{TP: }\PY{l+s+s2}{\PYZob{}}\PY{l+s+s2}{true\PYZus{}positives(y\PYZus{}test, preds\PYZus{}test, threshold)\PYZcb{}}
+         \PY{l+s+s2}{TN: }\PY{l+s+s2}{\PYZob{}}\PY{l+s+s2}{true\PYZus{}negatives(y\PYZus{}test, preds\PYZus{}test, threshold)\PYZcb{}}
+         \PY{l+s+s2}{FP: }\PY{l+s+s2}{\PYZob{}}\PY{l+s+s2}{false\PYZus{}positives(y\PYZus{}test, preds\PYZus{}test, threshold)\PYZcb{}}
+         \PY{l+s+s2}{FN: }\PY{l+s+s2}{\PYZob{}}\PY{l+s+s2}{false\PYZus{}negatives(y\PYZus{}test, preds\PYZus{}test, threshold)\PYZcb{}}
+         \PY{l+s+s2}{\PYZdq{}\PYZdq{}\PYZdq{}}\PY{p}{)}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Expected results}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{There are }\PY{l+s+s2}{\PYZob{}}\PY{l+s+s2}{sum(df[}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{category}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{] == }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{TP}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{)\PYZcb{} TP}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{There are }\PY{l+s+s2}{\PYZob{}}\PY{l+s+s2}{sum(df[}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{category}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{] == }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{TN}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{)\PYZcb{} TN}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{There are }\PY{l+s+s2}{\PYZob{}}\PY{l+s+s2}{sum(df[}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{category}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{] == }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{FP}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{)\PYZcb{} FP}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{There are }\PY{l+s+s2}{\PYZob{}}\PY{l+s+s2}{sum(df[}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{category}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{] == }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{FN}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{)\PYZcb{} FN}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+    y_test  preds_test category
+0        1         0.8       TP
+1        1         0.7       TP
+2        0         0.4       TN
+3        0         0.3       TN
+4        0         0.2       TN
+5        0         0.5       FP
+6        0         0.6       FP
+7        0         0.7       FP
+8        0         0.8       FP
+9        1         0.1       FN
+10       1         0.2       FN
+11       1         0.3       FN
+12       1         0.4       FN
+13       1         0.0       FN
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+threshold: 0.5
+
+Our functions calculated: 
+TP: 2
+TN: 3
+FP: 4
+FN: 5
+
+Expected results
+There are 2 TP
+There are 3 TN
+There are 4 FP
+There are 5 FN
+
+    \end{Verbatim}
+
+    Run the next cell to see a summary of evaluative metrics for the model
+predictions for each class.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{n}{util}\PY{o}{.}\PY{n}{get\PYZus{}performance\PYZus{}metrics}\PY{p}{(}\PY{n}{y}\PY{p}{,} \PY{n}{pred}\PY{p}{,} \PY{n}{class\PYZus{}labels}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}14}]:}                      TP   TN   FP  FN     Accuracy   Prevalence  Sensitivity  \textbackslash{}
+                                                                                        
+         Cardiomegaly         16  814  169   1  Not Defined  Not Defined  Not Defined   
+         Emphysema            20  869  103   8  Not Defined  Not Defined  Not Defined   
+         Effusion             99  690  196  15  Not Defined  Not Defined  Not Defined   
+         Hernia                1  743  255   1  Not Defined  Not Defined  Not Defined   
+         Infiltration        114  543  265  78  Not Defined  Not Defined  Not Defined   
+         Mass                 40  789  158  13  Not Defined  Not Defined  Not Defined   
+         Nodule               28  731  220  21  Not Defined  Not Defined  Not Defined   
+         Atelectasis          64  657  249  30  Not Defined  Not Defined  Not Defined   
+         Pneumothorax         24  785  183   8  Not Defined  Not Defined  Not Defined   
+         Pleural\_Thickening   24  713  259   4  Not Defined  Not Defined  Not Defined   
+         Pneumonia            14  661  320   5  Not Defined  Not Defined  Not Defined   
+         Fibrosis             10  725  261   4  Not Defined  Not Defined  Not Defined   
+         Edema                15  767  213   5  Not Defined  Not Defined  Not Defined   
+         Consolidation        36  658  297   9  Not Defined  Not Defined  Not Defined   
+         
+                             Specificity          PPV          NPV          AUC  \textbackslash{}
+                                                                                  
+         Cardiomegaly        Not Defined  Not Defined  Not Defined  Not Defined   
+         Emphysema           Not Defined  Not Defined  Not Defined  Not Defined   
+         Effusion            Not Defined  Not Defined  Not Defined  Not Defined   
+         Hernia              Not Defined  Not Defined  Not Defined  Not Defined   
+         Infiltration        Not Defined  Not Defined  Not Defined  Not Defined   
+         Mass                Not Defined  Not Defined  Not Defined  Not Defined   
+         Nodule              Not Defined  Not Defined  Not Defined  Not Defined   
+         Atelectasis         Not Defined  Not Defined  Not Defined  Not Defined   
+         Pneumothorax        Not Defined  Not Defined  Not Defined  Not Defined   
+         Pleural\_Thickening  Not Defined  Not Defined  Not Defined  Not Defined   
+         Pneumonia           Not Defined  Not Defined  Not Defined  Not Defined   
+         Fibrosis            Not Defined  Not Defined  Not Defined  Not Defined   
+         Edema               Not Defined  Not Defined  Not Defined  Not Defined   
+         Consolidation       Not Defined  Not Defined  Not Defined  Not Defined   
+         
+                                      F1 Threshold  
+                                                    
+         Cardiomegaly        Not Defined       0.5  
+         Emphysema           Not Defined       0.5  
+         Effusion            Not Defined       0.5  
+         Hernia              Not Defined       0.5  
+         Infiltration        Not Defined       0.5  
+         Mass                Not Defined       0.5  
+         Nodule              Not Defined       0.5  
+         Atelectasis         Not Defined       0.5  
+         Pneumothorax        Not Defined       0.5  
+         Pleural\_Thickening  Not Defined       0.5  
+         Pneumonia           Not Defined       0.5  
+         Fibrosis            Not Defined       0.5  
+         Edema               Not Defined       0.5  
+         Consolidation       Not Defined       0.5  
+\end{Verbatim}
+            
+    Right now it only has TP, TN, FP, FN. Throughout this assignment we'll
+fill in all the other metrics to learn more about our model performance.
+
+     \#\#\# 3.2 Accuracy
+
+    Let's use a threshold of .5 for the probability cutoff for our
+predictions for all classes and calculate our model's accuracy as we
+would normally do in a machine learning problem.
+
+\[accuracy = \frac{\text{true positives} + \text{true negatives}}{\text{true positives} + \text{true negatives} + \text{false positives} + \text{false negatives}}\]
+
+Use this formula to compute accuracy below:
+
+     Hints
+
+Remember to set the value for the threshold when calling the functions.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{c+c1}{\PYZsh{} UNQ\PYZus{}C2 (UNIQUE CELL IDENTIFIER, DO NOT EDIT)}
+         \PY{k}{def} \PY{n+nf}{get\PYZus{}accuracy}\PY{p}{(}\PY{n}{y}\PY{p}{,} \PY{n}{pred}\PY{p}{,} \PY{n}{th}\PY{o}{=}\PY{l+m+mf}{0.5}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+sd}{    Compute accuracy of predictions at threshold.}
+         
+         \PY{l+s+sd}{    Args:}
+         \PY{l+s+sd}{        y (np.array): ground truth, size (n\PYZus{}examples)}
+         \PY{l+s+sd}{        pred (np.array): model output, size (n\PYZus{}examples)}
+         \PY{l+s+sd}{        th (float): cutoff value for positive prediction from model}
+         \PY{l+s+sd}{    Returns:}
+         \PY{l+s+sd}{        accuracy (float): accuracy of predictions at threshold}
+         \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+             \PY{n}{accuracy} \PY{o}{=} \PY{l+m+mf}{0.0}
+             
+             \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} START CODE HERE (REPLACE INSTANCES OF \PYZsq{}None\PYZsq{} with your code) \PYZsh{}\PYZsh{}\PYZsh{}}
+             
+             \PY{c+c1}{\PYZsh{} get TP, FP, TN, FN using our previously defined functions}
+             \PY{n}{TP} \PY{o}{=} \PY{n}{true\PYZus{}positives}\PY{p}{(}\PY{n}{y}\PY{p}{,} \PY{n}{pred}\PY{p}{,} \PY{n}{th}\PY{p}{)}
+             \PY{n}{FP} \PY{o}{=} \PY{n}{false\PYZus{}positives}\PY{p}{(}\PY{n}{y}\PY{p}{,} \PY{n}{pred}\PY{p}{,} \PY{n}{th}\PY{p}{)}
+             \PY{n}{TN} \PY{o}{=} \PY{n}{true\PYZus{}negatives}\PY{p}{(}\PY{n}{y}\PY{p}{,} \PY{n}{pred}\PY{p}{,} \PY{n}{th}\PY{p}{)}
+             \PY{n}{FN} \PY{o}{=} \PY{n}{false\PYZus{}negatives}\PY{p}{(}\PY{n}{y}\PY{p}{,} \PY{n}{pred}\PY{p}{,} \PY{n}{th}\PY{p}{)}
+         
+             \PY{c+c1}{\PYZsh{} Compute accuracy using TP, FP, TN, FN}
+             \PY{n}{accuracy} \PY{o}{=} \PY{p}{(}\PY{n}{TP} \PY{o}{+} \PY{n}{TN}\PY{p}{)} \PY{o}{/} \PY{p}{(}\PY{n}{TP} \PY{o}{+} \PY{n}{TN} \PY{o}{+} \PY{n}{FP} \PY{o}{+} \PY{n}{FN}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} END CODE HERE \PYZsh{}\PYZsh{}\PYZsh{}}
+             
+             \PY{k}{return} \PY{n}{accuracy}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{c+c1}{\PYZsh{} Test}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Test case:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         
+         \PY{n}{y\PYZus{}test} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{test labels: }\PY{l+s+si}{\PYZob{}y\PYZus{}test\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{n}{preds\PYZus{}test} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{l+m+mf}{0.8}\PY{p}{,} \PY{l+m+mf}{0.8}\PY{p}{,} \PY{l+m+mf}{0.4}\PY{p}{,} \PY{l+m+mf}{0.6}\PY{p}{,} \PY{l+m+mf}{0.3}\PY{p}{]}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{test predictions: }\PY{l+s+si}{\PYZob{}preds\PYZus{}test\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{n}{threshold} \PY{o}{=} \PY{l+m+mf}{0.5}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{threshold: }\PY{l+s+si}{\PYZob{}threshold\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{computed accuracy: }\PY{l+s+s2}{\PYZob{}}\PY{l+s+s2}{get\PYZus{}accuracy(y\PYZus{}test, preds\PYZus{}test, threshold)\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Test case:
+test labels: \{y\_test\}
+test predictions: [0.8 0.8 0.4 0.6 0.3]
+threshold: 0.5
+computed accuracy: 0.6
+
+    \end{Verbatim}
+
+    \hypertarget{expected-output}{%
+\paragraph{Expected output:}\label{expected-output}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{test labels: \{y_test\}}
+\NormalTok{test predictions: [}\FloatTok{0.8} \FloatTok{0.8} \FloatTok{0.4} \FloatTok{0.6} \FloatTok{0.3}\NormalTok{]}
+\NormalTok{threshold: }\FloatTok{0.5}
+\NormalTok{computed accuracy: }\FloatTok{0.6}
+\end{Highlighting}
+\end{Shaded}
+
+    Run the next cell to see the accuracy of the model output for each
+class, as well as the number of true positives, true negatives, false
+positives, and false negatives.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{n}{util}\PY{o}{.}\PY{n}{get\PYZus{}performance\PYZus{}metrics}\PY{p}{(}\PY{n}{y}\PY{p}{,} \PY{n}{pred}\PY{p}{,} \PY{n}{class\PYZus{}labels}\PY{p}{,} \PY{n}{acc}\PY{o}{=}\PY{n}{get\PYZus{}accuracy}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}17}]:}                      TP   TN   FP  FN Accuracy   Prevalence  Sensitivity  \textbackslash{}
+                                                                                    
+         Cardiomegaly         16  814  169   1     0.83  Not Defined  Not Defined   
+         Emphysema            20  869  103   8    0.889  Not Defined  Not Defined   
+         Effusion             99  690  196  15    0.789  Not Defined  Not Defined   
+         Hernia                1  743  255   1    0.744  Not Defined  Not Defined   
+         Infiltration        114  543  265  78    0.657  Not Defined  Not Defined   
+         Mass                 40  789  158  13    0.829  Not Defined  Not Defined   
+         Nodule               28  731  220  21    0.759  Not Defined  Not Defined   
+         Atelectasis          64  657  249  30    0.721  Not Defined  Not Defined   
+         Pneumothorax         24  785  183   8    0.809  Not Defined  Not Defined   
+         Pleural\_Thickening   24  713  259   4    0.737  Not Defined  Not Defined   
+         Pneumonia            14  661  320   5    0.675  Not Defined  Not Defined   
+         Fibrosis             10  725  261   4    0.735  Not Defined  Not Defined   
+         Edema                15  767  213   5    0.782  Not Defined  Not Defined   
+         Consolidation        36  658  297   9    0.694  Not Defined  Not Defined   
+         
+                             Specificity          PPV          NPV          AUC  \textbackslash{}
+                                                                                  
+         Cardiomegaly        Not Defined  Not Defined  Not Defined  Not Defined   
+         Emphysema           Not Defined  Not Defined  Not Defined  Not Defined   
+         Effusion            Not Defined  Not Defined  Not Defined  Not Defined   
+         Hernia              Not Defined  Not Defined  Not Defined  Not Defined   
+         Infiltration        Not Defined  Not Defined  Not Defined  Not Defined   
+         Mass                Not Defined  Not Defined  Not Defined  Not Defined   
+         Nodule              Not Defined  Not Defined  Not Defined  Not Defined   
+         Atelectasis         Not Defined  Not Defined  Not Defined  Not Defined   
+         Pneumothorax        Not Defined  Not Defined  Not Defined  Not Defined   
+         Pleural\_Thickening  Not Defined  Not Defined  Not Defined  Not Defined   
+         Pneumonia           Not Defined  Not Defined  Not Defined  Not Defined   
+         Fibrosis            Not Defined  Not Defined  Not Defined  Not Defined   
+         Edema               Not Defined  Not Defined  Not Defined  Not Defined   
+         Consolidation       Not Defined  Not Defined  Not Defined  Not Defined   
+         
+                                      F1 Threshold  
+                                                    
+         Cardiomegaly        Not Defined       0.5  
+         Emphysema           Not Defined       0.5  
+         Effusion            Not Defined       0.5  
+         Hernia              Not Defined       0.5  
+         Infiltration        Not Defined       0.5  
+         Mass                Not Defined       0.5  
+         Nodule              Not Defined       0.5  
+         Atelectasis         Not Defined       0.5  
+         Pneumothorax        Not Defined       0.5  
+         Pleural\_Thickening  Not Defined       0.5  
+         Pneumonia           Not Defined       0.5  
+         Fibrosis            Not Defined       0.5  
+         Edema               Not Defined       0.5  
+         Consolidation       Not Defined       0.5  
+\end{Verbatim}
+            
+    If we were to judge our model's performance based on the accuracy
+metric, we would say that our model is not very accurate for detecting
+the \texttt{Infiltration} cases (accuracy of 0.657) but pretty accurate
+for detecting \texttt{Emphysema} (accuracy of 0.889).
+
+\textbf{But is that really the case?\ldots{}}
+
+Let's imagine a model that simply predicts that any patient does
+\textbf{Not} have \texttt{Emphysema}, regardless of patient's
+measurements. Let's calculate the accuracy for such a model.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{n}{get\PYZus{}accuracy}\PY{p}{(}\PY{n}{valid\PYZus{}results}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Emphysema}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{values}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{valid\PYZus{}results}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}18}]:} 0.972
+\end{Verbatim}
+            
+    As you can see above, such a model would be 97\% accurate! Even better
+than our deep learning based model.
+
+But is this really a good model? Wouldn't this model be wrong 100\% of
+the time if the patient actually had this condition?
+
+In the following sections, we will address this concern with more
+advanced model measures - \textbf{sensitivity and specificity} - that
+evaluate how well the model predicts positives for patients with the
+condition and negatives for cases that actually do not have the
+condition.
+
+     \#\#\# 3.3 Prevalence Another important concept is \textbf{prevalence}.
+* In a medical context, prevalence is the proportion of people in the
+population who have the disease (or condition, etc). * In machine
+learning terms, this is the proportion of positive examples. The
+expression for prevalence is:
+
+\[prevalence = \frac{1}{N} \sum_{i} y_i\]
+
+where \(y_i = 1\) when the example is `positive' (has the disease).
+
+Let's measure prevalence for each disease:
+
+     Hints
+
+You can use np.mean to calculate the formula.
+
+Actually, the automatic grader is expecting numpy.mean, so please use it
+instead of using an equally valid but different way of calculating the
+prevalence. =)
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{c+c1}{\PYZsh{} UNQ\PYZus{}C3 (UNIQUE CELL IDENTIFIER, DO NOT EDIT)}
+         \PY{k}{def} \PY{n+nf}{get\PYZus{}prevalence}\PY{p}{(}\PY{n}{y}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+sd}{    Compute prevalence.}
+         
+         \PY{l+s+sd}{    Args:}
+         \PY{l+s+sd}{        y (np.array): ground truth, size (n\PYZus{}examples)}
+         \PY{l+s+sd}{    Returns:}
+         \PY{l+s+sd}{        prevalence (float): prevalence of positive cases}
+         \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+             \PY{n}{prevalence} \PY{o}{=} \PY{l+m+mf}{0.0}
+             
+             \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} START CODE HERE (REPLACE INSTANCES OF \PYZsq{}None\PYZsq{} with your code) \PYZsh{}\PYZsh{}\PYZsh{}}
+             
+             \PY{n}{prevalence} \PY{o}{=} \PY{n}{y}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)} \PY{o}{/} \PY{n}{y}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+             
+             \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} END CODE HERE \PYZsh{}\PYZsh{}\PYZsh{}}
+             
+             \PY{k}{return} \PY{n}{prevalence}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{c+c1}{\PYZsh{} Test}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Test case:}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         
+         \PY{n}{y\PYZus{}test} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{test labels: }\PY{l+s+si}{\PYZob{}y\PYZus{}test\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{computed prevalence: }\PY{l+s+s2}{\PYZob{}}\PY{l+s+s2}{get\PYZus{}prevalence(y\PYZus{}test)\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Test case:
+
+test labels: [1 0 0 1 1 0 0 0 0 1]
+computed prevalence: 0.4
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{n}{util}\PY{o}{.}\PY{n}{get\PYZus{}performance\PYZus{}metrics}\PY{p}{(}\PY{n}{y}\PY{p}{,} \PY{n}{pred}\PY{p}{,} \PY{n}{class\PYZus{}labels}\PY{p}{,} \PY{n}{acc}\PY{o}{=}\PY{n}{get\PYZus{}accuracy}\PY{p}{,} \PY{n}{prevalence}\PY{o}{=}\PY{n}{get\PYZus{}prevalence}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}21}]:}                      TP   TN   FP  FN Accuracy Prevalence  Sensitivity  \textbackslash{}
+                                                                                  
+         Cardiomegaly         16  814  169   1     0.83      0.017  Not Defined   
+         Emphysema            20  869  103   8    0.889      0.028  Not Defined   
+         Effusion             99  690  196  15    0.789      0.114  Not Defined   
+         Hernia                1  743  255   1    0.744      0.002  Not Defined   
+         Infiltration        114  543  265  78    0.657      0.192  Not Defined   
+         Mass                 40  789  158  13    0.829      0.053  Not Defined   
+         Nodule               28  731  220  21    0.759      0.049  Not Defined   
+         Atelectasis          64  657  249  30    0.721      0.094  Not Defined   
+         Pneumothorax         24  785  183   8    0.809      0.032  Not Defined   
+         Pleural\_Thickening   24  713  259   4    0.737      0.028  Not Defined   
+         Pneumonia            14  661  320   5    0.675      0.019  Not Defined   
+         Fibrosis             10  725  261   4    0.735      0.014  Not Defined   
+         Edema                15  767  213   5    0.782       0.02  Not Defined   
+         Consolidation        36  658  297   9    0.694      0.045  Not Defined   
+         
+                             Specificity          PPV          NPV          AUC  \textbackslash{}
+                                                                                  
+         Cardiomegaly        Not Defined  Not Defined  Not Defined  Not Defined   
+         Emphysema           Not Defined  Not Defined  Not Defined  Not Defined   
+         Effusion            Not Defined  Not Defined  Not Defined  Not Defined   
+         Hernia              Not Defined  Not Defined  Not Defined  Not Defined   
+         Infiltration        Not Defined  Not Defined  Not Defined  Not Defined   
+         Mass                Not Defined  Not Defined  Not Defined  Not Defined   
+         Nodule              Not Defined  Not Defined  Not Defined  Not Defined   
+         Atelectasis         Not Defined  Not Defined  Not Defined  Not Defined   
+         Pneumothorax        Not Defined  Not Defined  Not Defined  Not Defined   
+         Pleural\_Thickening  Not Defined  Not Defined  Not Defined  Not Defined   
+         Pneumonia           Not Defined  Not Defined  Not Defined  Not Defined   
+         Fibrosis            Not Defined  Not Defined  Not Defined  Not Defined   
+         Edema               Not Defined  Not Defined  Not Defined  Not Defined   
+         Consolidation       Not Defined  Not Defined  Not Defined  Not Defined   
+         
+                                      F1 Threshold  
+                                                    
+         Cardiomegaly        Not Defined       0.5  
+         Emphysema           Not Defined       0.5  
+         Effusion            Not Defined       0.5  
+         Hernia              Not Defined       0.5  
+         Infiltration        Not Defined       0.5  
+         Mass                Not Defined       0.5  
+         Nodule              Not Defined       0.5  
+         Atelectasis         Not Defined       0.5  
+         Pneumothorax        Not Defined       0.5  
+         Pleural\_Thickening  Not Defined       0.5  
+         Pneumonia           Not Defined       0.5  
+         Fibrosis            Not Defined       0.5  
+         Edema               Not Defined       0.5  
+         Consolidation       Not Defined       0.5  
+\end{Verbatim}
+            
+    \texttt{Hernia} has a prevalence 0.002, which is the rarest among the
+studied conditions in our dataset.
+
+     \#\#\# 3.4 Sensitivity and Specificity
+
+Sensitivity and specificity are two of the most prominent numbers that
+are used to measure diagnostics tests. - Sensitivity is the probability
+that our test outputs positive given that the case is actually positive.
+- Specificity is the probability that the test outputs negative given
+that the case is actually negative.
+
+We can phrase this easily in terms of true positives, true negatives,
+false positives, and false negatives:
+
+\[sensitivity = \frac{\text{true positives}}{\text{true positives} + \text{false negatives}}\]
+
+\[specificity = \frac{\text{true negatives}}{\text{true negatives} + \text{false positives}}\]
+
+Let's calculate sensitivity and specificity for our model:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{c+c1}{\PYZsh{} UNQ\PYZus{}C4 (UNIQUE CELL IDENTIFIER, DO NOT EDIT)}
+         \PY{k}{def} \PY{n+nf}{get\PYZus{}sensitivity}\PY{p}{(}\PY{n}{y}\PY{p}{,} \PY{n}{pred}\PY{p}{,} \PY{n}{th}\PY{o}{=}\PY{l+m+mf}{0.5}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+sd}{    Compute sensitivity of predictions at threshold.}
+         
+         \PY{l+s+sd}{    Args:}
+         \PY{l+s+sd}{        y (np.array): ground truth, size (n\PYZus{}examples)}
+         \PY{l+s+sd}{        pred (np.array): model output, size (n\PYZus{}examples)}
+         \PY{l+s+sd}{        th (float): cutoff value for positive prediction from model}
+         \PY{l+s+sd}{    Returns:}
+         \PY{l+s+sd}{        sensitivity (float): probability that our test outputs positive given that the case is actually positive}
+         \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+             \PY{n}{sensitivity} \PY{o}{=} \PY{l+m+mf}{0.0}
+             
+             \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} START CODE HERE (REPLACE INSTANCES OF \PYZsq{}None\PYZsq{} with your code) \PYZsh{}\PYZsh{}\PYZsh{}}
+             
+             \PY{c+c1}{\PYZsh{} get TP and FN using our previously defined functions}
+             \PY{n}{TP} \PY{o}{=} \PY{n}{true\PYZus{}positives}\PY{p}{(}\PY{n}{y}\PY{p}{,} \PY{n}{pred}\PY{p}{,} \PY{n}{th}\PY{p}{)}
+             \PY{n}{FN} \PY{o}{=} \PY{n}{false\PYZus{}negatives}\PY{p}{(}\PY{n}{y}\PY{p}{,} \PY{n}{pred}\PY{p}{,} \PY{n}{th}\PY{p}{)}
+         
+             \PY{c+c1}{\PYZsh{} use TP and FN to compute sensitivity}
+             \PY{n}{sensitivity} \PY{o}{=} \PY{n}{TP} \PY{o}{/} \PY{p}{(}\PY{n}{TP} \PY{o}{+} \PY{n}{FN}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} END CODE HERE \PYZsh{}\PYZsh{}\PYZsh{}}
+             
+             \PY{k}{return} \PY{n}{sensitivity}
+         
+         \PY{k}{def} \PY{n+nf}{get\PYZus{}specificity}\PY{p}{(}\PY{n}{y}\PY{p}{,} \PY{n}{pred}\PY{p}{,} \PY{n}{th}\PY{o}{=}\PY{l+m+mf}{0.5}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+sd}{    Compute specificity of predictions at threshold.}
+         
+         \PY{l+s+sd}{    Args:}
+         \PY{l+s+sd}{        y (np.array): ground truth, size (n\PYZus{}examples)}
+         \PY{l+s+sd}{        pred (np.array): model output, size (n\PYZus{}examples)}
+         \PY{l+s+sd}{        th (float): cutoff value for positive prediction from model}
+         \PY{l+s+sd}{    Returns:}
+         \PY{l+s+sd}{        specificity (float): probability that the test outputs negative given that the case is actually negative}
+         \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+             \PY{n}{specificity} \PY{o}{=} \PY{l+m+mf}{0.0}
+             
+             \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} START CODE HERE (REPLACE INSTANCES OF \PYZsq{}None\PYZsq{} with your code) \PYZsh{}\PYZsh{}\PYZsh{}}
+             
+             
+             \PY{c+c1}{\PYZsh{} get TN and FP using our previously defined functions}
+             \PY{n}{TN} \PY{o}{=} \PY{n}{true\PYZus{}negatives}\PY{p}{(}\PY{n}{y}\PY{p}{,} \PY{n}{pred}\PY{p}{,} \PY{n}{th}\PY{p}{)}
+             \PY{n}{FP} \PY{o}{=} \PY{n}{false\PYZus{}positives}\PY{p}{(}\PY{n}{y}\PY{p}{,} \PY{n}{pred}\PY{p}{,} \PY{n}{th}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{} use TN and FP to compute specificity }
+             \PY{n}{specificity} \PY{o}{=} \PY{n}{TN} \PY{o}{/} \PY{p}{(}\PY{n}{TN} \PY{o}{+} \PY{n}{FP}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} END CODE HERE \PYZsh{}\PYZsh{}\PYZsh{}}
+             
+             \PY{k}{return} \PY{n}{specificity}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{c+c1}{\PYZsh{} Test}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Test case}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         
+         \PY{n}{y\PYZus{}test} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{test labels: }\PY{l+s+si}{\PYZob{}y\PYZus{}test\PYZcb{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{n}{preds\PYZus{}test} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{l+m+mf}{0.8}\PY{p}{,} \PY{l+m+mf}{0.8}\PY{p}{,} \PY{l+m+mf}{0.4}\PY{p}{,} \PY{l+m+mf}{0.6}\PY{p}{,} \PY{l+m+mf}{0.3}\PY{p}{]}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{test predictions: }\PY{l+s+si}{\PYZob{}preds\PYZus{}test\PYZcb{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{n}{threshold} \PY{o}{=} \PY{l+m+mf}{0.5}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{threshold: }\PY{l+s+si}{\PYZob{}threshold\PYZcb{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{computed sensitivity: }\PY{l+s+s2}{\PYZob{}}\PY{l+s+s2}{get\PYZus{}sensitivity(y\PYZus{}test, preds\PYZus{}test, threshold):.2f\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{computed specificity: }\PY{l+s+s2}{\PYZob{}}\PY{l+s+s2}{get\PYZus{}specificity(y\PYZus{}test, preds\PYZus{}test, threshold):.2f\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Test case
+test labels: [1 0 0 1 1]
+
+test predictions: [0.8 0.8 0.4 0.6 0.3]
+
+threshold: 0.5
+
+computed sensitivity: 0.67
+computed specificity: 0.50
+
+    \end{Verbatim}
+
+    \hypertarget{expected-output}{%
+\paragraph{Expected output:}\label{expected-output}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Test case}
+\NormalTok{test labels: [}\DecValTok{1} \DecValTok{0} \DecValTok{0} \DecValTok{1} \DecValTok{1}\NormalTok{]}
+
+\NormalTok{test predictions: [}\FloatTok{0.8} \FloatTok{0.8} \FloatTok{0.4} \FloatTok{0.6} \FloatTok{0.3}\NormalTok{]}
+
+\NormalTok{threshold: }\FloatTok{0.5}
+
+\NormalTok{computed sensitivity: }\FloatTok{0.67}
+\NormalTok{computed specificity: }\FloatTok{0.50}
+\end{Highlighting}
+\end{Shaded}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}24}]:} \PY{n}{util}\PY{o}{.}\PY{n}{get\PYZus{}performance\PYZus{}metrics}\PY{p}{(}\PY{n}{y}\PY{p}{,} \PY{n}{pred}\PY{p}{,} \PY{n}{class\PYZus{}labels}\PY{p}{,} \PY{n}{acc}\PY{o}{=}\PY{n}{get\PYZus{}accuracy}\PY{p}{,} \PY{n}{prevalence}\PY{o}{=}\PY{n}{get\PYZus{}prevalence}\PY{p}{,} 
+                                 \PY{n}{sens}\PY{o}{=}\PY{n}{get\PYZus{}sensitivity}\PY{p}{,} \PY{n}{spec}\PY{o}{=}\PY{n}{get\PYZus{}specificity}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}24}]:}                      TP   TN   FP  FN Accuracy Prevalence Sensitivity  \textbackslash{}
+                                                                                 
+         Cardiomegaly         16  814  169   1     0.83      0.017       0.941   
+         Emphysema            20  869  103   8    0.889      0.028       0.714   
+         Effusion             99  690  196  15    0.789      0.114       0.868   
+         Hernia                1  743  255   1    0.744      0.002         0.5   
+         Infiltration        114  543  265  78    0.657      0.192       0.594   
+         Mass                 40  789  158  13    0.829      0.053       0.755   
+         Nodule               28  731  220  21    0.759      0.049       0.571   
+         Atelectasis          64  657  249  30    0.721      0.094       0.681   
+         Pneumothorax         24  785  183   8    0.809      0.032        0.75   
+         Pleural\_Thickening   24  713  259   4    0.737      0.028       0.857   
+         Pneumonia            14  661  320   5    0.675      0.019       0.737   
+         Fibrosis             10  725  261   4    0.735      0.014       0.714   
+         Edema                15  767  213   5    0.782       0.02        0.75   
+         Consolidation        36  658  297   9    0.694      0.045         0.8   
+         
+                            Specificity          PPV          NPV          AUC  \textbackslash{}
+                                                                                 
+         Cardiomegaly             0.828  Not Defined  Not Defined  Not Defined   
+         Emphysema                0.894  Not Defined  Not Defined  Not Defined   
+         Effusion                 0.779  Not Defined  Not Defined  Not Defined   
+         Hernia                   0.744  Not Defined  Not Defined  Not Defined   
+         Infiltration             0.672  Not Defined  Not Defined  Not Defined   
+         Mass                     0.833  Not Defined  Not Defined  Not Defined   
+         Nodule                   0.769  Not Defined  Not Defined  Not Defined   
+         Atelectasis              0.725  Not Defined  Not Defined  Not Defined   
+         Pneumothorax             0.811  Not Defined  Not Defined  Not Defined   
+         Pleural\_Thickening       0.734  Not Defined  Not Defined  Not Defined   
+         Pneumonia                0.674  Not Defined  Not Defined  Not Defined   
+         Fibrosis                 0.735  Not Defined  Not Defined  Not Defined   
+         Edema                    0.783  Not Defined  Not Defined  Not Defined   
+         Consolidation            0.689  Not Defined  Not Defined  Not Defined   
+         
+                                      F1 Threshold  
+                                                    
+         Cardiomegaly        Not Defined       0.5  
+         Emphysema           Not Defined       0.5  
+         Effusion            Not Defined       0.5  
+         Hernia              Not Defined       0.5  
+         Infiltration        Not Defined       0.5  
+         Mass                Not Defined       0.5  
+         Nodule              Not Defined       0.5  
+         Atelectasis         Not Defined       0.5  
+         Pneumothorax        Not Defined       0.5  
+         Pleural\_Thickening  Not Defined       0.5  
+         Pneumonia           Not Defined       0.5  
+         Fibrosis            Not Defined       0.5  
+         Edema               Not Defined       0.5  
+         Consolidation       Not Defined       0.5  
+\end{Verbatim}
+            
+    Note that specificity and sensitivity do not depend on the prevalence of
+the positive class in the dataset. * This is because the statistics are
+only computed within people of the same class * Sensitivity only
+considers output on people in the positive class * Similarly,
+specificity only considers output on people in the negative class.
+
+     \#\#\# 3.5 PPV and NPV
+
+Diagnostically, however, sensitivity and specificity are not helpful.
+Sensitivity, for example, tells us the probability our test outputs
+positive given that the person already has the condition. Here, we are
+conditioning on the thing we would like to find out (whether the patient
+has the condition)!
+
+What would be more helpful is the probability that the person has the
+disease given that our test outputs positive. That brings us to positive
+predictive value (PPV) and negative predictive value (NPV).
+
+\begin{itemize}
+\tightlist
+\item
+  Positive predictive value (PPV) is the probability that subjects with
+  a positive screening test truly have the disease.
+\item
+  Negative predictive value (NPV) is the probability that subjects with
+  a negative screening test truly don't have the disease.
+\end{itemize}
+
+Again, we can formulate these in terms of true positives, true
+negatives, false positives, and false negatives:
+
+\[PPV = \frac{\text{true positives}}{\text{true positives} + \text{false positives}}\]
+
+\[NPV = \frac{\text{true negatives}}{\text{true negatives} + \text{false negatives}}\]
+
+Let's calculate PPV \& NPV for our model:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}25}]:} \PY{c+c1}{\PYZsh{} UNQ\PYZus{}C5 (UNIQUE CELL IDENTIFIER, DO NOT EDIT)}
+         \PY{k}{def} \PY{n+nf}{get\PYZus{}ppv}\PY{p}{(}\PY{n}{y}\PY{p}{,} \PY{n}{pred}\PY{p}{,} \PY{n}{th}\PY{o}{=}\PY{l+m+mf}{0.5}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+sd}{    Compute PPV of predictions at threshold.}
+         
+         \PY{l+s+sd}{    Args:}
+         \PY{l+s+sd}{        y (np.array): ground truth, size (n\PYZus{}examples)}
+         \PY{l+s+sd}{        pred (np.array): model output, size (n\PYZus{}examples)}
+         \PY{l+s+sd}{        th (float): cutoff value for positive prediction from model}
+         \PY{l+s+sd}{    Returns:}
+         \PY{l+s+sd}{        PPV (float): positive predictive value of predictions at threshold}
+         \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+             \PY{n}{PPV} \PY{o}{=} \PY{l+m+mf}{0.0}
+             
+             \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} START CODE HERE (REPLACE INSTANCES OF \PYZsq{}None\PYZsq{} with your code) \PYZsh{}\PYZsh{}\PYZsh{}}
+             
+             
+             
+             \PY{c+c1}{\PYZsh{} get TP and FP using our previously defined functions}
+             \PY{n}{TP} \PY{o}{=} \PY{n}{true\PYZus{}positives}\PY{p}{(}\PY{n}{y}\PY{p}{,} \PY{n}{pred}\PY{p}{,} \PY{n}{th}\PY{p}{)}
+             \PY{n}{FP} \PY{o}{=} \PY{n}{false\PYZus{}positives}\PY{p}{(}\PY{n}{y}\PY{p}{,} \PY{n}{pred}\PY{p}{,} \PY{n}{th}\PY{p}{)}
+         
+             \PY{c+c1}{\PYZsh{} use TP and FP to compute PPV}
+             \PY{n}{PPV} \PY{o}{=} \PY{n}{TP} \PY{o}{/} \PY{p}{(}\PY{n}{TP} \PY{o}{+} \PY{n}{FP}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} END CODE HERE \PYZsh{}\PYZsh{}\PYZsh{}}
+             
+             \PY{k}{return} \PY{n}{PPV}
+         
+         \PY{k}{def} \PY{n+nf}{get\PYZus{}npv}\PY{p}{(}\PY{n}{y}\PY{p}{,} \PY{n}{pred}\PY{p}{,} \PY{n}{th}\PY{o}{=}\PY{l+m+mf}{0.5}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+sd}{    Compute NPV of predictions at threshold.}
+         
+         \PY{l+s+sd}{    Args:}
+         \PY{l+s+sd}{        y (np.array): ground truth, size (n\PYZus{}examples)}
+         \PY{l+s+sd}{        pred (np.array): model output, size (n\PYZus{}examples)}
+         \PY{l+s+sd}{        th (float): cutoff value for positive prediction from model}
+         \PY{l+s+sd}{    Returns:}
+         \PY{l+s+sd}{        NPV (float): negative predictive value of predictions at threshold}
+         \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+             \PY{n}{NPV} \PY{o}{=} \PY{l+m+mf}{0.0}
+             
+             \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} START CODE HERE (REPLACE INSTANCES OF \PYZsq{}None\PYZsq{} with your code) \PYZsh{}\PYZsh{}\PYZsh{}}
+             
+             \PY{c+c1}{\PYZsh{} get TN and FN using our previously defined functions}
+             \PY{n}{TN} \PY{o}{=} \PY{n}{true\PYZus{}negatives}\PY{p}{(}\PY{n}{y}\PY{p}{,} \PY{n}{pred}\PY{p}{,} \PY{n}{th}\PY{p}{)}
+             \PY{n}{FN} \PY{o}{=} \PY{n}{false\PYZus{}negatives}\PY{p}{(}\PY{n}{y}\PY{p}{,} \PY{n}{pred}\PY{p}{,} \PY{n}{th}\PY{p}{)}
+         
+             \PY{c+c1}{\PYZsh{} use TN and FN to compute NPV}
+             \PY{n}{NPV} \PY{o}{=} \PY{n}{TN} \PY{o}{/} \PY{p}{(}\PY{n}{TN} \PY{o}{+} \PY{n}{FN}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} END CODE HERE \PYZsh{}\PYZsh{}\PYZsh{}}
+             
+             \PY{k}{return} \PY{n}{NPV}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}26}]:} \PY{c+c1}{\PYZsh{} Test}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Test case:}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         
+         \PY{n}{y\PYZus{}test} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{test labels: }\PY{l+s+si}{\PYZob{}y\PYZus{}test\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{n}{preds\PYZus{}test} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{l+m+mf}{0.8}\PY{p}{,} \PY{l+m+mf}{0.8}\PY{p}{,} \PY{l+m+mf}{0.4}\PY{p}{,} \PY{l+m+mf}{0.6}\PY{p}{,} \PY{l+m+mf}{0.3}\PY{p}{]}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{test predictions: }\PY{l+s+si}{\PYZob{}preds\PYZus{}test\PYZcb{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{n}{threshold} \PY{o}{=} \PY{l+m+mf}{0.5}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{threshold: }\PY{l+s+si}{\PYZob{}threshold\PYZcb{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{computed ppv: }\PY{l+s+s2}{\PYZob{}}\PY{l+s+s2}{get\PYZus{}ppv(y\PYZus{}test, preds\PYZus{}test, threshold):.2f\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{computed npv: }\PY{l+s+s2}{\PYZob{}}\PY{l+s+s2}{get\PYZus{}npv(y\PYZus{}test, preds\PYZus{}test, threshold):.2f\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Test case:
+
+test labels: [1 0 0 1 1]
+test predictions: [0.8 0.8 0.4 0.6 0.3]
+
+threshold: 0.5
+
+computed ppv: 0.67
+computed npv: 0.50
+
+    \end{Verbatim}
+
+    \hypertarget{expected-output}{%
+\paragraph{Expected output:}\label{expected-output}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Test case:}
+
+\NormalTok{test labels: [}\DecValTok{1} \DecValTok{0} \DecValTok{0} \DecValTok{1} \DecValTok{1}\NormalTok{]}
+\NormalTok{test predictions: [}\FloatTok{0.8} \FloatTok{0.8} \FloatTok{0.4} \FloatTok{0.6} \FloatTok{0.3}\NormalTok{]}
+
+\NormalTok{threshold: }\FloatTok{0.5}
+
+\NormalTok{computed ppv: }\FloatTok{0.67}
+\NormalTok{computed npv: }\FloatTok{0.50}
+\end{Highlighting}
+\end{Shaded}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}27}]:} \PY{n}{util}\PY{o}{.}\PY{n}{get\PYZus{}performance\PYZus{}metrics}\PY{p}{(}\PY{n}{y}\PY{p}{,} \PY{n}{pred}\PY{p}{,} \PY{n}{class\PYZus{}labels}\PY{p}{,} \PY{n}{acc}\PY{o}{=}\PY{n}{get\PYZus{}accuracy}\PY{p}{,} \PY{n}{prevalence}\PY{o}{=}\PY{n}{get\PYZus{}prevalence}\PY{p}{,} 
+                                 \PY{n}{sens}\PY{o}{=}\PY{n}{get\PYZus{}sensitivity}\PY{p}{,} \PY{n}{spec}\PY{o}{=}\PY{n}{get\PYZus{}specificity}\PY{p}{,} \PY{n}{ppv}\PY{o}{=}\PY{n}{get\PYZus{}ppv}\PY{p}{,} \PY{n}{npv}\PY{o}{=}\PY{n}{get\PYZus{}npv}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}27}]:}                      TP   TN   FP  FN Accuracy Prevalence Sensitivity  \textbackslash{}
+                                                                                 
+         Cardiomegaly         16  814  169   1     0.83      0.017       0.941   
+         Emphysema            20  869  103   8    0.889      0.028       0.714   
+         Effusion             99  690  196  15    0.789      0.114       0.868   
+         Hernia                1  743  255   1    0.744      0.002         0.5   
+         Infiltration        114  543  265  78    0.657      0.192       0.594   
+         Mass                 40  789  158  13    0.829      0.053       0.755   
+         Nodule               28  731  220  21    0.759      0.049       0.571   
+         Atelectasis          64  657  249  30    0.721      0.094       0.681   
+         Pneumothorax         24  785  183   8    0.809      0.032        0.75   
+         Pleural\_Thickening   24  713  259   4    0.737      0.028       0.857   
+         Pneumonia            14  661  320   5    0.675      0.019       0.737   
+         Fibrosis             10  725  261   4    0.735      0.014       0.714   
+         Edema                15  767  213   5    0.782       0.02        0.75   
+         Consolidation        36  658  297   9    0.694      0.045         0.8   
+         
+                            Specificity    PPV    NPV          AUC           F1  \textbackslash{}
+                                                                                  
+         Cardiomegaly             0.828  0.086  0.999  Not Defined  Not Defined   
+         Emphysema                0.894  0.163  0.991  Not Defined  Not Defined   
+         Effusion                 0.779  0.336  0.979  Not Defined  Not Defined   
+         Hernia                   0.744  0.004  0.999  Not Defined  Not Defined   
+         Infiltration             0.672  0.301  0.874  Not Defined  Not Defined   
+         Mass                     0.833  0.202  0.984  Not Defined  Not Defined   
+         Nodule                   0.769  0.113  0.972  Not Defined  Not Defined   
+         Atelectasis              0.725  0.204  0.956  Not Defined  Not Defined   
+         Pneumothorax             0.811  0.116   0.99  Not Defined  Not Defined   
+         Pleural\_Thickening       0.734  0.085  0.994  Not Defined  Not Defined   
+         Pneumonia                0.674  0.042  0.992  Not Defined  Not Defined   
+         Fibrosis                 0.735  0.037  0.995  Not Defined  Not Defined   
+         Edema                    0.783  0.066  0.994  Not Defined  Not Defined   
+         Consolidation            0.689  0.108  0.987  Not Defined  Not Defined   
+         
+                            Threshold  
+                                       
+         Cardiomegaly             0.5  
+         Emphysema                0.5  
+         Effusion                 0.5  
+         Hernia                   0.5  
+         Infiltration             0.5  
+         Mass                     0.5  
+         Nodule                   0.5  
+         Atelectasis              0.5  
+         Pneumothorax             0.5  
+         Pleural\_Thickening       0.5  
+         Pneumonia                0.5  
+         Fibrosis                 0.5  
+         Edema                    0.5  
+         Consolidation            0.5  
+\end{Verbatim}
+            
+    Notice that despite having very high sensitivity and accuracy, the PPV
+of the predictions could still be very low.
+
+This is the case with \texttt{Edema}, for example. * The sensitivity for
+\texttt{Edema} is 0.75. * However, given that the model predicted
+positive, the probability that a person has Edema (its PPV) is only
+0.066!
+
+     \#\#\# 3.6 ROC Curve
+
+So far we have been operating under the assumption that our model's
+prediction of \texttt{0.5} and above should be treated as positive and
+otherwise it should be treated as negative. This however was a rather
+arbitrary choice. One way to see this, is to look at a very informative
+visualization called the receiver operating characteristic (ROC) curve.
+
+The ROC curve is created by plotting the true positive rate (TPR)
+against the false positive rate (FPR) at various threshold settings. The
+ideal point is at the top left, with a true positive rate of 1 and a
+false positive rate of 0. The various points on the curve are generated
+by gradually changing the threshold.
+
+Let's look at this curve for our model:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}28}]:} \PY{n}{util}\PY{o}{.}\PY{n}{get\PYZus{}curve}\PY{p}{(}\PY{n}{y}\PY{p}{,} \PY{n}{pred}\PY{p}{,} \PY{n}{class\PYZus{}labels}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_58_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    The area under the ROC curve is also called AUCROC or C-statistic and is
+a measure of goodness of fit. In medical literature this number also
+gives the probability that a randomly selected patient who experienced a
+condition had a higher risk score than a patient who had not experienced
+the event. This summarizes the model output across all thresholds, and
+provides a good sense of the discriminative power of a given model.
+
+Let's use the \texttt{sklearn} metric function of
+\texttt{roc\_auc\_score} to add this score to our metrics table.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}29}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{metrics} \PY{k}{import} \PY{n}{roc\PYZus{}auc\PYZus{}score}
+         \PY{n}{util}\PY{o}{.}\PY{n}{get\PYZus{}performance\PYZus{}metrics}\PY{p}{(}\PY{n}{y}\PY{p}{,} \PY{n}{pred}\PY{p}{,} \PY{n}{class\PYZus{}labels}\PY{p}{,} \PY{n}{acc}\PY{o}{=}\PY{n}{get\PYZus{}accuracy}\PY{p}{,} \PY{n}{prevalence}\PY{o}{=}\PY{n}{get\PYZus{}prevalence}\PY{p}{,} 
+                                 \PY{n}{sens}\PY{o}{=}\PY{n}{get\PYZus{}sensitivity}\PY{p}{,} \PY{n}{spec}\PY{o}{=}\PY{n}{get\PYZus{}specificity}\PY{p}{,} \PY{n}{ppv}\PY{o}{=}\PY{n}{get\PYZus{}ppv}\PY{p}{,} \PY{n}{npv}\PY{o}{=}\PY{n}{get\PYZus{}npv}\PY{p}{,} \PY{n}{auc}\PY{o}{=}\PY{n}{roc\PYZus{}auc\PYZus{}score}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}29}]:}                      TP   TN   FP  FN Accuracy Prevalence Sensitivity  \textbackslash{}
+                                                                                 
+         Cardiomegaly         16  814  169   1     0.83      0.017       0.941   
+         Emphysema            20  869  103   8    0.889      0.028       0.714   
+         Effusion             99  690  196  15    0.789      0.114       0.868   
+         Hernia                1  743  255   1    0.744      0.002         0.5   
+         Infiltration        114  543  265  78    0.657      0.192       0.594   
+         Mass                 40  789  158  13    0.829      0.053       0.755   
+         Nodule               28  731  220  21    0.759      0.049       0.571   
+         Atelectasis          64  657  249  30    0.721      0.094       0.681   
+         Pneumothorax         24  785  183   8    0.809      0.032        0.75   
+         Pleural\_Thickening   24  713  259   4    0.737      0.028       0.857   
+         Pneumonia            14  661  320   5    0.675      0.019       0.737   
+         Fibrosis             10  725  261   4    0.735      0.014       0.714   
+         Edema                15  767  213   5    0.782       0.02        0.75   
+         Consolidation        36  658  297   9    0.694      0.045         0.8   
+         
+                            Specificity    PPV    NPV    AUC           F1 Threshold  
+                                                                                     
+         Cardiomegaly             0.828  0.086  0.999  0.933  Not Defined       0.5  
+         Emphysema                0.894  0.163  0.991  0.935  Not Defined       0.5  
+         Effusion                 0.779  0.336  0.979  0.891  Not Defined       0.5  
+         Hernia                   0.744  0.004  0.999  0.644  Not Defined       0.5  
+         Infiltration             0.672  0.301  0.874  0.696  Not Defined       0.5  
+         Mass                     0.833  0.202  0.984  0.888  Not Defined       0.5  
+         Nodule                   0.769  0.113  0.972  0.745  Not Defined       0.5  
+         Atelectasis              0.725  0.204  0.956  0.781  Not Defined       0.5  
+         Pneumothorax             0.811  0.116   0.99  0.826  Not Defined       0.5  
+         Pleural\_Thickening       0.734  0.085  0.994  0.868  Not Defined       0.5  
+         Pneumonia                0.674  0.042  0.992  0.762  Not Defined       0.5  
+         Fibrosis                 0.735  0.037  0.995  0.801  Not Defined       0.5  
+         Edema                    0.783  0.066  0.994  0.856  Not Defined       0.5  
+         Consolidation            0.689  0.108  0.987  0.799  Not Defined       0.5  
+\end{Verbatim}
+            
+     \#\# 4. Confidence Intervals
+
+    Of course our dataset is only a sample of the real world, and our
+calculated values for all above metrics is an estimate of the real world
+values. It would be good to quantify this uncertainty due to the
+sampling of our dataset. We'll do this through the use of confidence
+intervals. A 95\% confidence interval for an estimate \(\hat{s}\) of a
+parameter \(s\) is an interval \(I = (a, b)\) such that 95\% of the time
+when the experiment is run, the true value \(s\) is contained in \(I\).
+More concretely, if we were to run the experiment many times, then the
+fraction of those experiments for which \(I\) contains the true
+parameter would tend towards 95\%.
+
+While some estimates come with methods for computing the confidence
+interval analytically, more complicated statistics, such as the AUC for
+example, are difficult. For these we can use a method called the
+\emph{bootstrap}. The bootstrap estimates the uncertainty by resampling
+the dataset with replacement. For each resampling \(i\), we will get a
+new estimate, \(\hat{s}_i\). We can then estimate the distribution of
+\(\hat{s}\) by using the distribution of \(\hat{s}_i\) for our bootstrap
+samples.
+
+In the code below, we create bootstrap samples and compute sample AUCs
+from those samples. Note that we use stratified random sampling
+(sampling from the positive and negative classes separately) to make
+sure that members of each class are represented.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}30}]:} \PY{k}{def} \PY{n+nf}{bootstrap\PYZus{}auc}\PY{p}{(}\PY{n}{y}\PY{p}{,} \PY{n}{pred}\PY{p}{,} \PY{n}{classes}\PY{p}{,} \PY{n}{bootstraps} \PY{o}{=} \PY{l+m+mi}{100}\PY{p}{,} \PY{n}{fold\PYZus{}size} \PY{o}{=} \PY{l+m+mi}{1000}\PY{p}{)}\PY{p}{:}
+             \PY{n}{statistics} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{classes}\PY{p}{)}\PY{p}{,} \PY{n}{bootstraps}\PY{p}{)}\PY{p}{)}
+         
+             \PY{k}{for} \PY{n}{c} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{classes}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{columns}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{y}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pred}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+                 \PY{n}{df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{y}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{y}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{n}{c}\PY{p}{]}
+                 \PY{n}{df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pred}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{pred}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{n}{c}\PY{p}{]}
+                 \PY{c+c1}{\PYZsh{} get positive examples for stratified sampling}
+                 \PY{n}{df\PYZus{}pos} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{n}{df}\PY{o}{.}\PY{n}{y} \PY{o}{==} \PY{l+m+mi}{1}\PY{p}{]}
+                 \PY{n}{df\PYZus{}neg} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{n}{df}\PY{o}{.}\PY{n}{y} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{]}
+                 \PY{n}{prevalence} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{df\PYZus{}pos}\PY{p}{)} \PY{o}{/} \PY{n+nb}{len}\PY{p}{(}\PY{n}{df}\PY{p}{)}
+                 \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{bootstraps}\PY{p}{)}\PY{p}{:}
+                     \PY{c+c1}{\PYZsh{} stratified sampling of positive and negative examples}
+                     \PY{n}{pos\PYZus{}sample} \PY{o}{=} \PY{n}{df\PYZus{}pos}\PY{o}{.}\PY{n}{sample}\PY{p}{(}\PY{n}{n} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n}{fold\PYZus{}size} \PY{o}{*} \PY{n}{prevalence}\PY{p}{)}\PY{p}{,} \PY{n}{replace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+                     \PY{n}{neg\PYZus{}sample} \PY{o}{=} \PY{n}{df\PYZus{}neg}\PY{o}{.}\PY{n}{sample}\PY{p}{(}\PY{n}{n} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n}{fold\PYZus{}size} \PY{o}{*} \PY{p}{(}\PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{n}{prevalence}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n}{replace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+         
+                     \PY{n}{y\PYZus{}sample} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{concatenate}\PY{p}{(}\PY{p}{[}\PY{n}{pos\PYZus{}sample}\PY{o}{.}\PY{n}{y}\PY{o}{.}\PY{n}{values}\PY{p}{,} \PY{n}{neg\PYZus{}sample}\PY{o}{.}\PY{n}{y}\PY{o}{.}\PY{n}{values}\PY{p}{]}\PY{p}{)}
+                     \PY{n}{pred\PYZus{}sample} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{concatenate}\PY{p}{(}\PY{p}{[}\PY{n}{pos\PYZus{}sample}\PY{o}{.}\PY{n}{pred}\PY{o}{.}\PY{n}{values}\PY{p}{,} \PY{n}{neg\PYZus{}sample}\PY{o}{.}\PY{n}{pred}\PY{o}{.}\PY{n}{values}\PY{p}{]}\PY{p}{)}
+                     \PY{n}{score} \PY{o}{=} \PY{n}{roc\PYZus{}auc\PYZus{}score}\PY{p}{(}\PY{n}{y\PYZus{}sample}\PY{p}{,} \PY{n}{pred\PYZus{}sample}\PY{p}{)}
+                     \PY{n}{statistics}\PY{p}{[}\PY{n}{c}\PY{p}{]}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n}{score}
+             \PY{k}{return} \PY{n}{statistics}
+         
+         \PY{n}{statistics} \PY{o}{=} \PY{n}{bootstrap\PYZus{}auc}\PY{p}{(}\PY{n}{y}\PY{p}{,} \PY{n}{pred}\PY{p}{,} \PY{n}{class\PYZus{}labels}\PY{p}{)}
+\end{Verbatim}
+
+
+    Now we can compute confidence intervals from the sample statistics that
+we computed.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}31}]:} \PY{n}{util}\PY{o}{.}\PY{n}{print\PYZus{}confidence\PYZus{}intervals}\PY{p}{(}\PY{n}{class\PYZus{}labels}\PY{p}{,} \PY{n}{statistics}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}31}]:}                    Mean AUC (CI 5\%-95\%)
+         Cardiomegaly           0.93 (0.90-0.97)
+         Emphysema              0.93 (0.91-0.96)
+         Effusion               0.89 (0.87-0.91)
+         Hernia                 0.61 (0.30-0.98)
+         Infiltration           0.70 (0.67-0.72)
+         Mass                   0.89 (0.85-0.92)
+         Nodule                 0.74 (0.67-0.80)
+         Atelectasis            0.78 (0.74-0.82)
+         Pneumothorax           0.83 (0.75-0.89)
+         Pleural\_Thickening     0.86 (0.81-0.91)
+         Pneumonia              0.75 (0.67-0.83)
+         Fibrosis               0.80 (0.72-0.86)
+         Edema                  0.86 (0.81-0.90)
+         Consolidation          0.80 (0.75-0.85)
+\end{Verbatim}
+            
+    As you can see, our confidence intervals are much wider for some classes
+than for others. Hernia, for example, has an interval around (0.30 -
+0.98), indicating that we can't be certain it is better than chance (at
+0.5).
+
+     \#\# 5. Precision-Recall Curve
+
+    Precision-Recall is a useful measure of success of prediction when the
+classes are very imbalanced.
+
+In information retrieval - Precision is a measure of result relevancy
+and that is equivalent to our previously defined PPV. - Recall is a
+measure of how many truly relevant results are returned and that is
+equivalent to our previously defined sensitivity measure.
+
+The precision-recall curve (PRC) shows the trade-off between precision
+and recall for different thresholds. A high area under the curve
+represents both high recall and high precision, where high precision
+relates to a low false positive rate, and high recall relates to a low
+false negative rate.
+
+High scores for both show that the classifier is returning accurate
+results (high precision), as well as returning a majority of all
+positive results (high recall).
+
+Run the following cell to generate a PRC:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}32}]:} \PY{n}{util}\PY{o}{.}\PY{n}{get\PYZus{}curve}\PY{p}{(}\PY{n}{y}\PY{p}{,} \PY{n}{pred}\PY{p}{,} \PY{n}{class\PYZus{}labels}\PY{p}{,} \PY{n}{curve}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{prc}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_69_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+     \#\# 6. F1 Score
+
+    F1 score is the harmonic mean of the precision and recall, where an F1
+score reaches its best value at 1 (perfect precision and recall) and
+worst at 0.
+
+Again, we can simply use \texttt{sklearn}'s utility metric function of
+\texttt{f1\_score} to add this measure to our performance table.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}33}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{metrics} \PY{k}{import} \PY{n}{f1\PYZus{}score}
+         \PY{n}{util}\PY{o}{.}\PY{n}{get\PYZus{}performance\PYZus{}metrics}\PY{p}{(}\PY{n}{y}\PY{p}{,} \PY{n}{pred}\PY{p}{,} \PY{n}{class\PYZus{}labels}\PY{p}{,} \PY{n}{acc}\PY{o}{=}\PY{n}{get\PYZus{}accuracy}\PY{p}{,} \PY{n}{prevalence}\PY{o}{=}\PY{n}{get\PYZus{}prevalence}\PY{p}{,} 
+                                 \PY{n}{sens}\PY{o}{=}\PY{n}{get\PYZus{}sensitivity}\PY{p}{,} \PY{n}{spec}\PY{o}{=}\PY{n}{get\PYZus{}specificity}\PY{p}{,} \PY{n}{ppv}\PY{o}{=}\PY{n}{get\PYZus{}ppv}\PY{p}{,} \PY{n}{npv}\PY{o}{=}\PY{n}{get\PYZus{}npv}\PY{p}{,} \PY{n}{auc}\PY{o}{=}\PY{n}{roc\PYZus{}auc\PYZus{}score}\PY{p}{,}\PY{n}{f1}\PY{o}{=}\PY{n}{f1\PYZus{}score}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}33}]:}                      TP   TN   FP  FN Accuracy Prevalence Sensitivity  \textbackslash{}
+                                                                                 
+         Cardiomegaly         16  814  169   1     0.83      0.017       0.941   
+         Emphysema            20  869  103   8    0.889      0.028       0.714   
+         Effusion             99  690  196  15    0.789      0.114       0.868   
+         Hernia                1  743  255   1    0.744      0.002         0.5   
+         Infiltration        114  543  265  78    0.657      0.192       0.594   
+         Mass                 40  789  158  13    0.829      0.053       0.755   
+         Nodule               28  731  220  21    0.759      0.049       0.571   
+         Atelectasis          64  657  249  30    0.721      0.094       0.681   
+         Pneumothorax         24  785  183   8    0.809      0.032        0.75   
+         Pleural\_Thickening   24  713  259   4    0.737      0.028       0.857   
+         Pneumonia            14  661  320   5    0.675      0.019       0.737   
+         Fibrosis             10  725  261   4    0.735      0.014       0.714   
+         Edema                15  767  213   5    0.782       0.02        0.75   
+         Consolidation        36  658  297   9    0.694      0.045         0.8   
+         
+                            Specificity    PPV    NPV    AUC     F1 Threshold  
+                                                                               
+         Cardiomegaly             0.828  0.086  0.999  0.933  0.158       0.5  
+         Emphysema                0.894  0.163  0.991  0.935  0.265       0.5  
+         Effusion                 0.779  0.336  0.979  0.891  0.484       0.5  
+         Hernia                   0.744  0.004  0.999  0.644  0.008       0.5  
+         Infiltration             0.672  0.301  0.874  0.696  0.399       0.5  
+         Mass                     0.833  0.202  0.984  0.888  0.319       0.5  
+         Nodule                   0.769  0.113  0.972  0.745  0.189       0.5  
+         Atelectasis              0.725  0.204  0.956  0.781  0.314       0.5  
+         Pneumothorax             0.811  0.116   0.99  0.826  0.201       0.5  
+         Pleural\_Thickening       0.734  0.085  0.994  0.868  0.154       0.5  
+         Pneumonia                0.674  0.042  0.992  0.762  0.079       0.5  
+         Fibrosis                 0.735  0.037  0.995  0.801   0.07       0.5  
+         Edema                    0.783  0.066  0.994  0.856  0.121       0.5  
+         Consolidation            0.689  0.108  0.987  0.799   0.19       0.5  
+\end{Verbatim}
+            
+     \#\# 7. Calibration
+
+    When performing classification we often want not only to predict the
+class label, but also obtain a probability of each label. This
+probability would ideally give us some kind of confidence on the
+prediction. In order to observe how our model's generated probabilities
+are aligned with the real probabilities, we can plot what's called a
+\emph{calibration curve}.
+
+In order to generate a calibration plot, we first bucketize our
+predictions to a fixed number of separate bins (e.g.~5) between 0 and 1.
+We then calculate a point for each bin: the x-value for each point is
+the mean for the probability that our model has assigned to these points
+and the y-value for each point fraction of true positives in that bin.
+We then plot these points in a linear plot. A well-calibrated model has
+a calibration curve that almost aligns with the y=x line.
+
+The \texttt{sklearn} library has a utility \texttt{calibration\_curve}
+for generating a calibration plot. Let's use it and take a look at our
+model's calibration:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}34}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{calibration} \PY{k}{import} \PY{n}{calibration\PYZus{}curve}
+         \PY{k}{def} \PY{n+nf}{plot\PYZus{}calibration\PYZus{}curve}\PY{p}{(}\PY{n}{y}\PY{p}{,} \PY{n}{pred}\PY{p}{)}\PY{p}{:}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{20}\PY{p}{,} \PY{l+m+mi}{20}\PY{p}{)}\PY{p}{)}
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{class\PYZus{}labels}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{,} \PY{n}{i} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{)}
+                 \PY{n}{fraction\PYZus{}of\PYZus{}positives}\PY{p}{,} \PY{n}{mean\PYZus{}predicted\PYZus{}value} \PY{o}{=} \PY{n}{calibration\PYZus{}curve}\PY{p}{(}\PY{n}{y}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{i}\PY{p}{]}\PY{p}{,} \PY{n}{pred}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{i}\PY{p}{]}\PY{p}{,} \PY{n}{n\PYZus{}bins}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{)}
+                 \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{linestyle}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                 \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{mean\PYZus{}predicted\PYZus{}value}\PY{p}{,} \PY{n}{fraction\PYZus{}of\PYZus{}positives}\PY{p}{,} \PY{n}{marker}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                 \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Predicted Value}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                 \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Fraction of Positives}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                 \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{n}{class\PYZus{}labels}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{tight\PYZus{}layout}\PY{p}{(}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}35}]:} \PY{n}{plot\PYZus{}calibration\PYZus{}curve}\PY{p}{(}\PY{n}{y}\PY{p}{,} \PY{n}{pred}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_76_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    As the above plots show, for most predictions our model's calibration
+plot does not resemble a well calibrated plot. How can we fix
+that?\ldots{}
+
+Thankfully, there is a very useful method called
+\href{https://en.wikipedia.org/wiki/Platt_scaling}{Platt scaling} which
+works by fitting a logistic regression model to our model's scores. To
+build this model, we will be using the training portion of our dataset
+to generate the linear model and then will use the model to calibrate
+the predictions for our test portion.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}36}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{linear\PYZus{}model} \PY{k}{import} \PY{n}{LogisticRegression} \PY{k}{as} \PY{n}{LR} 
+         
+         \PY{n}{y\PYZus{}train} \PY{o}{=} \PY{n}{train\PYZus{}results}\PY{p}{[}\PY{n}{class\PYZus{}labels}\PY{p}{]}\PY{o}{.}\PY{n}{values}
+         \PY{n}{pred\PYZus{}train} \PY{o}{=} \PY{n}{train\PYZus{}results}\PY{p}{[}\PY{n}{pred\PYZus{}labels}\PY{p}{]}\PY{o}{.}\PY{n}{values}
+         \PY{n}{pred\PYZus{}calibrated} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros\PYZus{}like}\PY{p}{(}\PY{n}{pred}\PY{p}{)}
+         
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{class\PYZus{}labels}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+             \PY{n}{lr} \PY{o}{=} \PY{n}{LR}\PY{p}{(}\PY{n}{solver}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{liblinear}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{max\PYZus{}iter}\PY{o}{=}\PY{l+m+mi}{10000}\PY{p}{)}
+             \PY{n}{lr}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{pred\PYZus{}train}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{n}{i}\PY{p}{]}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{n}{i}\PY{p}{]}\PY{p}{)}    
+             \PY{n}{pred\PYZus{}calibrated}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n}{lr}\PY{o}{.}\PY{n}{predict\PYZus{}proba}\PY{p}{(}\PY{n}{pred}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{n}{i}\PY{p}{]}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}37}]:} \PY{n}{plot\PYZus{}calibration\PYZus{}curve}\PY{p}{(}\PY{n}{y}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{p}{]}\PY{p}{,} \PY{n}{pred\PYZus{}calibrated}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_79_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{thats-it}{%
+\section{That's it!}\label{thats-it}}
+
+Congratulations! That was a lot of metrics to get familiarized with. We
+hope that you feel a lot more confident in your understanding of medical
+diagnostic evaluation and test your models correctly in your future work
+:)
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
