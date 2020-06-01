@@ -1,0 +1,11 @@
+https://learner.coursera.help/hc/en-us/articles/360004990332-Download-Jupyter-Workspace-files
+
+commands
+
+rm -f ~/workspace.tar.gz && rm  -f ~/work/workspace.tar.gz
+tar -czf ~/workspace.tar.gz ~/work
+mv ~/workspace.tar.gz ~/work/workspace.tar.gz
+
+for bigger files
+tar -czf - ~/work | split --bytes=100MB - ~/workspaces.tar.gz
+mv ~/workspace.tar.gz* ~/work/
